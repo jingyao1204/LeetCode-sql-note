@@ -1,0 +1,13 @@
+思路：分组managerid --> 找到5个以上的ID --> 通过ID找到名字
+注意顺序：select --> from --> where --> group by --> having --> order by
+
+RIGHT
+"""
+select name
+from employee
+where id in (select managerid
+            from employee 
+            group by managerid
+            having count(managerid) >4)
+;
+"""
