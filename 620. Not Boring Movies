@@ -1,2 +1,6 @@
 where ..... and.....
 AND 前面不能有comma
+取奇数两种表达
+1. mod(XX, 2) = 1        2. (xx % 2) = 1
+不等于两种表达
+1. XX ！= ‘boring'       2. xx <> 'boring'
