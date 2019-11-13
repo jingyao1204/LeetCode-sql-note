@@ -1,0 +1,9 @@
+update 和 set  用法
+
+“”“
+update salary 
+set sex = (if sex = ('m', 'f', 'm'));
+”“”
+
+如果sex = m, set sex = f; else, set sex = m
+注意syntax写法
