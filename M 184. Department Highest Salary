@@ -1,0 +1,10 @@
+为什么必须嵌套一个select？
+下面为什么错？
+
+select d.Name as Department,
+       e.Name as Employee,
+       max(e.Salary) as Salary
+from employee e
+left join department d
+on e.departmentid = d.id
+group by Department;
