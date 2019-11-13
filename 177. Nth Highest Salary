@@ -1,0 +1,30 @@
+ANSWER 1:
+"""
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+DECLARE m INT;
+SET m = n-1;
+  RETURN (
+      # Write your MySQL query statement below.
+       select distinct salary
+       from employee 
+       order by salary desc
+       limit m,1
+  
+         );
+END
+"""
+
+ANSWER 2:
+"""
+       select salary
+       from employee 
+       group by salary    # group by后相同salary被认为是同一排名，所以不需要distinct #
+       order by salary desc
+       limit m,1
+"""
+
+LIMIT OFFSET, COUNT
+OFFSET: 从第几个开始OUTPUT， COUNT：一共OUTPUT的个数
+eg. LIMIT 1 --> 最常用，排序后返回第一个值
+都是从 零 开始计数，所以本题应是： LIMIT n-1 , 1
