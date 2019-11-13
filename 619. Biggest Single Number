@@ -1,0 +1,22 @@
+WRONG ANSWER
+```
+select num
+from my_numbers
+group by num
+having count(*) = 1
+order by num desc
+limit 1
+```
+上述答案无法满足题目条件：If there is no such number, just output null.
+正确答案 
+1. 用max 函数 若要输出null，需要满足两个条件，第一，select中应是聚合函数，第二，聚合函数处理的行数应为0。
+2. 
+select 
+(
+select num
+from my_numbers
+group by num
+having count(*) = 1
+order by num desc
+limit 1)
+as num;
