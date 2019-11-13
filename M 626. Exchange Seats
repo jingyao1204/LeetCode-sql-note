@@ -1,0 +1,27 @@
+WRONG
+"""
+select (case
+        when mod(id,2)=1 and id != max(id) then id+1
+        when mod(id,2)=0 then id-1
+        else id
+        end
+        ) as id,
+        student
+from seat
+order by id;
+"""
+为什么不能直接用max在里面？
+
+
+RIGHT
+"""
+select (case
+        when mod(id,2)=1 and id != (SELECT MAX(ID) FROM SEAT) then id+1
+        when mod(id,2)=0 then id-1
+        else id
+        end
+        ) as id,
+        student
+from seat
+order by id;
+"""
