@@ -1,0 +1,24 @@
+WRONG
+"""
+select name
+from candidate c
+right join vote v
+on c.id = v.candidateid
+group by v.candidateid
+order by count(*) desc
+limit 1;
+"""
+
+RIGHT
+"""
+select name
+from candidate 
+where id = (select candidateid
+            from vote
+            group by candidateid
+            order by count(*) desc
+            limit 1);
+"""
+
+思路：从vote表找到winnerID --> 在candidate表里用ID 找到name
+疑问：为什么 ID = 的syntax正确， “ID in” 的syntax错误？？？  in 和 =  有什么区别？
