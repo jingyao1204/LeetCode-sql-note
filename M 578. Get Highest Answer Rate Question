@@ -1,0 +1,29 @@
+ANSWER  - CASE WHEN
+
+"""
+select tb1.question_id as survey_log
+from (
+      select question_id,
+             sum(case when action = 'answer' then 1 
+                  else 0
+                  end) as ans_num,
+             sum(case when action = 'show' then 1
+                  else 0
+                  end) as ask_num
+      from survey_log
+      group by question_id) as tb1
+order by (ans_num / ask_num) desc
+limit 1;
+"""
+不明白为什么order by / limit 1 不在括号里？
+
+ANSWER 
+“”“
+select question_id as survey_log
+from survey_log
+group by question_id
+order by count(answer_id)/count(distinct question_id) desc
+limit 1;
+”“”
+
+可以是同一个人回答多个问题，所以answer_id不需要distinct
