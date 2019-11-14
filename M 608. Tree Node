@@ -1,0 +1,26 @@
+WRONG
+"""
+select id, 
+          (
+          case when p_id is null then "Root"    # case when 应该是对同一栏？？不能一个p_id，一个id ？？ #
+               when id in (select p_id from tree 
+                    and p_id is not null) then "Inner"
+               else "Leaf"       
+          end)
+from tree;
+"""
+
+CORRECT
+"""
+select t1.id, (case 
+              when t1.id = (select t2.id from tree t2 where t2.p_id is null) then "Root"
+              when t1.id in (select t3.p_id from tree t3) then "Inner"     
+              else "Leaf"
+            end) as Type
+from tree t1
+order by t1.id;
+"""
+
+syntax要点：
+1. 每一个select...from 即便是同一个表格，也要rename
+2. 存在多个值中用 IN， 等于一个特定的值用 = ， 判定是否为NULL 用 
