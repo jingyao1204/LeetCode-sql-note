@@ -1,0 +1,16 @@
+OFFICIAL SOLUTION
+"""
+select d.Name as Department,
+       e.Name as Employee,
+       e.Salary
+from employee e
+inner join department d
+on e.DepartmentId = d.Id
+where (select count(distinct salary)
+       from employee e1
+       where e1.salary > e.salary
+       and e1.departmentid = e.departmentid) < 3
+;
+
+"""
+疑问：为什么inner join ✅， left join❌？？？？
