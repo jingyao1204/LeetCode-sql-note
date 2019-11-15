@@ -1,0 +1,31 @@
+ANSWER
+"""
+select America, Asia, Europe
+from 
+   (select @am:=0, @as:=0, @eu:=0) as t,
+   (select @am:=@am + 1 as amid, name as America
+    from student 
+    where continent = 'America'
+    order by America) as t1
+    
+    left join
+    
+   (select @as:=@as+1 as asid, name as Asia
+    from student 
+    where continent = 'Asia'
+    order by Asia) as t2
+    on t1.amid = t2.asid
+    
+    left join
+    
+   (select @eu:=@eu+1 as euid, name as Europe
+    from student where continent = 'Europe'
+    order by Europe) as t3
+    on t1.amid = t3.euid
+  ;
+"""
+
+1. 缩进不影响结果
+2. 若join报错，看是否多打了逗号
+3. 题干output对学生名字按字母排了序，所以需要order by
+4. 因为题干已知美国学生最多，所以是美国表作为t1 
