@@ -1,0 +1,17 @@
+OFFICIAL SOLUTION
+"""
+select distinct s1.*
+from stadium s1, stadium s2, stadium s3
+where s1.people >= 100 and s2.people>=100 and s3.people>=100
+and  (
+(s1.id - s2.id = 1 and s1.id - s3.id = 2 and s2.id - s3.id = 1)  -- 1 2 3
+or 
+(s2.id - s1.id = 1 and s1.id - s3.id = 1 and s2.id - s3.id = 2) -- 2 1 3
+or
+(s3.id - s2.id = 1 and s2.id - s1.id = 1 and s3.id - s1.id = 2) -- 3 2 1
+)
+order by s1.id
+;
+"""
+
+只用考虑s1在开头、中间、末尾的情况？？？
