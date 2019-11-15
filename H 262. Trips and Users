@@ -15,6 +15,9 @@ order by t.request_at
 
 注意最终output是按日期group by的
 不用join也可以用from multi table 然后where 
+疑问：为什么只需要where t.client_id = u.users_id?????
+
+
 
 official solution
 """
