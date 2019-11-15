@@ -1,0 +1,23 @@
+OFFICIAL SOLUTION
+"""
+select avg(number) as median
+from Numbers n1
+where n1.Frequency >= abs ( (select sum(frequency) from numbers n2
+                             where n1.number >= n2.number) -
+                             (select sum(frequency) from numbers n3
+                             where n1.number <= n3.number)) 
+                             ;
+"""
+
+
+MY ANSWER 
+"""
+select avg(number) as median
+from Numbers n1
+where n1.Frequency >= abs ( (select sum(frequency) from numbers n2
+                             where n1.frequency >= n2.frequency) -
+                             (select sum(frequency) from numbers n3
+                             where n1.frequency <= n3.frequency)) 
+                             ;
+"""
+where条件中比较 frequency 大小 是否不符合逻辑？？？？
