@@ -1,0 +1,35 @@
+CORRECT
+"""
+select t.request_at as Day,
+       round(sum(case when t.status = 'completed' then 0
+         else 1
+          end) / count(*), 2) as 'Cancellation Rate'
+from trips t, users u
+where t.client_id = u.users_id
+and u.banned ="No"
+and t.request_at between "2013-10-01" and "2013-10-03"
+group by t.request_at
+order by t.request_at
+;
+"""
+
+注意最终output是按日期group by的
+不用join也可以用from multi table 然后where 
+
+official solution
+"""
+SELECT tb1.Request_at as Day, 
+       ROUND(SUM(CASE WHEN tb1.Status = "completed" THEN 0
+                      ELSE 1
+                 END) / COUNT(*),2) as "Cancellation Rate"
+FROM Trips as tb1
+INNER JOIN Users as tb2
+ON tb1.Client_Id = tb2.Users_Id And tb2.Banned = "No"
+INNER JOIN Users as tb3
+ON tb1.Driver_Id = tb3.Users_Id And tb3.Banned = "No"
+WHERE tb1.Request_at BETWEEN "2013-10-01" AND "2013-10-03"
+GROUP BY tb1.Request_at
+ORDER BY tb1.Request_at;
+"""
+
+为什么inner join就可以，left join 不行？
